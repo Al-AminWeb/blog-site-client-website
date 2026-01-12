@@ -1,11 +1,11 @@
 // app/blogs/[slug]/page.tsx
 import { getPostBySlug, getRelatedPosts } from "@/lib/mock-api";
 import { notFound } from "next/navigation";
-import Image from "next/image";
+import type { Metadata } from "next";
 import { Calendar, Clock, Tag, Share2, Bookmark, User } from "lucide-react";
 import Link from "next/link";
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
     const post = await getPostBySlug(params.slug);
 
     if (!post) {
