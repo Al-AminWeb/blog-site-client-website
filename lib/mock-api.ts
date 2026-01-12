@@ -1,9 +1,14 @@
-import { posts } from "@/mock/posts";
+import {posts} from "@/mock/posts";
 
 export async function getPosts() {
-    return posts.filter(p => p.status === "PUBLISHED");
-}
+    // Add categories to posts
+    const categories = ["Frontend", "Backend", "DevOps", "Database", "Tutorial", "Best Practices"];
 
-export async function getPostBySlug(slug: string) {
-    return posts.find(p => p.slug === slug);
+    return posts.map(post => ({
+        ...post,
+        category: categories[Math.floor(Math.random() * categories.length)],
+        // Add some mock engagement data
+        likes: Math.floor(Math.random() * 100),
+        views: Math.floor(Math.random() * 1000) + 100,
+    }));
 }
